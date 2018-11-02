@@ -1,0 +1,19 @@
+<%#= form_with(model: [ @blog, @blog.posts.build ], local: true) do |f| %>
+<%= form_with(model: [ @blog, @post ], local: true) do |f| %>
+  
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <p>
+    <%= f.label :text %>
+    <%= f.text_field :text %>
+  </p>
+
+  <p class="field">
+   <%= f.label :avatar %><br />
+   <%= f.file_field :avatar %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>

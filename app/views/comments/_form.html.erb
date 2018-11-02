@@ -1,0 +1,14 @@
+<%#= form_with(model: [ @blog, @post, @post.comments.build ], :remote => true ) do |f| %>
+<%= form_for @comment, url: {action: "update"}, :remote => true do |f| %>
+
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <p>
+    <%= f.label :commenter %><br/>
+    <%= f.text_field :commenter %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>

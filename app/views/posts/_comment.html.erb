@@ -1,0 +1,13 @@
+<div id="comment_<%= comment.id %>">
+  <strong>commenter:-</strong>
+  <%= comment.commenter %><br />
+  <% if current_user.id == comment.user_id %>
+    <span class= "edit_link", data-url = "<%= edit_blog_post_comment_path(@blog, @post, comment) %>"> Edit </span>
+    <%#= link_to 'edit', edit_blog_post_comment_path(@blog, @post, comment) %> |
+    <%= link_to 'Destroy', blog_post_comment_path(@blog, @post, comment), method: :delete,
+           :remote => true, data: { confirm: 'Are you sure?' } %><br />
+  <% end %>
+</div>
+
+
+

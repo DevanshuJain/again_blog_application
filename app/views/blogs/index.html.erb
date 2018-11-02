@@ -1,0 +1,26 @@
+<h1>Blogs page</h1>
+<% if user_signed_in? %>
+  <%= link_to 'add_blog', new_blog_path %>
+<% end %>
+
+<% if current_user.avatar.present? %>
+  <p><%= image_tag(current_user.avatar.url, height: '300', width: '250') %><p>
+<% end %>
+
+<table class= "table" >
+  <tr>
+    <th>title</th>
+  </tr>
+
+  <% @blogs.each do |blog| %>
+    <tr>
+      <td><%= blog.title %></td>
+      <td><%= link_to 'show', blog_path(blog) %></td>
+      <% if current_user.id == blog.user_id %>
+        <td><%= link_to 'edit', edit_blog_path(blog) %></td>
+        <td><%= link_to 'Destroy', blog_path(blog), method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>

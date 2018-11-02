@@ -1,0 +1,31 @@
+<% if @post.avatar.present? %>
+  <p><%= image_tag(@post.avatar.url, height: '300', width: '250') %><p>
+<% end %>
+<p>
+  <strong>text:- </strong>
+  <%= @post.text %>
+</p>
+
+<h3>comment</h3>
+<% @post.comments.each do |comment| %>
+  <%= render "comment", comment: comment %>
+<% end %>
+
+<div id= "new_comment">
+
+</div>
+
+<h1>Add a comment</h1>
+
+<%= form_with(model: [ @blog, @post, @post.comments.build ], :remote => true ) do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <p>
+    <%= f.label :commenter %><br/>
+    <%= f.text_field :commenter %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>

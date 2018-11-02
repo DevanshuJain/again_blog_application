@@ -1,0 +1,26 @@
+<p>
+  <strong>title:- </strong>
+  <%= @blog.title %>
+</p>
+
+<% if user_signed_in? %>
+  <%= link_to 'add_post', new_blog_post_path(@blog) %>
+<% end %>
+
+<table class= "table">
+  <tr>
+    <td>text</td>
+  </tr>
+  <% @posts.each do |post| %>
+  <tr>
+    <td><%= post.text %></td>
+    <td><%= link_to 'show',  blog_post_path(@blog ,post) %></td>
+      <% if current_user.id == post.user_id %>
+        <td><%= link_to 'edit', edit_blog_post_path(@blog ,post) %></td>
+        <td><%= link_to 'Destroy', blog_post_path(@blog ,post), method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+  </tr>
+  <% end %>
+</table>
+<%= link_to 'back', blogs_path %>
